@@ -153,12 +153,16 @@ def checkForModMessage():
 					if commandType == 'user' and toAdd not in user_list:
 						user_list.append(command[2].lower())
 						saveUserList()
+						r.send_message(text_type(message.author), "user " + toAdd +" added to watch list", "user " + toAdd +" added to watch list")
 					if commandType == 'word' and toAdd not in word_list:
 						word_list.append(command[2].lower())
 						saveWordList()
+						r.send_message(text_type(message.author), "word " + toAdd +" added to watch list", "word " + toAdd +" added to watch list")
 					if commandType == 'mod' and toAdd not in mod_list:
-						word_list.append(command[2].lower())
+						mod_list.append(command[2].lower())
 						saveApprovedList()
+						r.send_message(text_type(message.author), "user " + toAdd +" added to approved list", "user " + toAdd +" added to approved list")
+		message.mark_as_read()
 
 def scanPosts():
 	
@@ -226,12 +230,11 @@ def startup():
 		r.login(username, password)
 		print("logged in, starting Minion Mod")
 		while True:
-			scanPosts()
 			checkForModMessage()
+			scanPosts()
 			print("Waiting " + str(minutesToWait) + " minutes")
 			time.sleep(60 * minutesToWait)
 	except praw.errors.InvalidUserPass:
 		print("login failed, try again")
 
 startup()
-
