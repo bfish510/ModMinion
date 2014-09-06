@@ -151,15 +151,15 @@ def checkForModMessage():
 					commandType = command[1].lower()
 					toAdd = command[2].lower()
 					if commandType == 'user' and toAdd not in user_list:
-						user_list.append(command[2].lower())
+						user_list.append(toAdd)
 						saveUserList()
 						r.send_message(text_type(message.author), "user " + toAdd +" added to watch list", "user " + toAdd +" added to watch list")
 					if commandType == 'word' and toAdd not in word_list:
-						word_list.append(command[2].lower())
+						word_list.append(toAdd)
 						saveWordList()
 						r.send_message(text_type(message.author), "word " + toAdd +" added to watch list", "word " + toAdd +" added to watch list")
 					if commandType == 'mod' and toAdd not in mod_list:
-						mod_list.append(command[2].lower())
+						mod_list.append(toAdd)
 						saveApprovedList()
 						r.send_message(text_type(message.author), "user " + toAdd +" added to approved list", "user " + toAdd +" added to approved list")
 		message.mark_as_read()
