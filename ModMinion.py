@@ -55,7 +55,7 @@ def checkCommentsInThread(thread):
 		if comment.id not in commentIDList:
 			commentIDList.append(comment.id)
 			if not isinstance(comment, praw.objects.MoreComments):
-				if checkAgainstWordBlackList(comment.body):
+				if checkAgainstWordBlackList(comment.body.lower()):
 					addCommentWarningToNextModMail(comment)
 				if text_type(comment.author) not in foundUserList and checkUsernameEnumeration(comment.author):
 					addUserWarningToNextModMail(comment.author)
@@ -64,7 +64,7 @@ def checkCommentsInThread(thread):
 def checkSubmission(submission):
 	if checkUsernameEnumeration(submission.author):
 		addUserWarningToNextModMail(submission.author)
-	if checkAgainstWordBlackList(submission.selftext):
+	if checkAgainstWordBlackList(submission.selftext.lower()):
 		addSubmissionContentToNextModMail(submission)
 
 def addSubmissionContentToNextModMail(submission):
